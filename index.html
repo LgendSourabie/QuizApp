@@ -20,7 +20,7 @@
     <script src="script.js"></script>
     <title>Quiz App</title>
   </head>
-  <body>
+  <body onload="initialize()">
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">QuizApp</span>
@@ -31,24 +31,30 @@
       <div class="card quiz-card">
         <img src="/images/woman.png" class="card-img-top" alt="Woman" />
         <div class="card-body">
-          <h5 class="card-title">Frage</h5>
+          <h5 id="frage" class="card-title">Frage</h5>
 
           <div class="card mb-2">
-            <div class="card-body">Antwort</div>
+            <div id="question1" class="card-body">Antwort</div>
           </div>
 
           <div class="card mb-2">
-            <div class="card-body">Antwort</div>
+            <div id="question2" class="card-body">Antwort</div>
           </div>
           <div class="card mb-2">
-            <div class="card-body">Antwort</div>
+            <div id="question3" class="card-body">Antwort</div>
           </div>
           <div class="card mb-2">
-            <div class="card-body">Antwort</div>
+            <div id="question4" class="card-body">Antwort</div>
           </div>
           <div class="question-footer">
-            <div><b>1</b> von <b>5</b> Fragen</div>
-            <button type="button" class="btn btn-success">Nächste Frage</button>
+            <div><b>1</b> von <b id="number-question">5</b> Fragen</div>
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="generateCurrentIndex()"
+            >
+              Nächste Frage
+            </button>
           </div>
         </div>
       </div>
