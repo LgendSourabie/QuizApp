@@ -1,0 +1,22 @@
+/* body {
+  min-height: 100vh;
+  background-color: #0c5080;
+} */
+
+.main-container {
+  min-height: 100vh;
+  background-color: #0c5080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quiz-card {
+  width: 30rem;
+}
