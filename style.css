@@ -2,6 +2,9 @@
   min-height: 100vh;
   background-color: #0c5080;
 } */
+/* body {
+  overflow-y: hidden;
+} */
 
 .main-container {
   min-height: 100vh;
@@ -29,4 +32,23 @@
 .bg-danger,
 .bg-success {
   color: white;
+}
+.width-100 {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.headline {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 32px;
+  padding: 10px;
+}
+.middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
 }
