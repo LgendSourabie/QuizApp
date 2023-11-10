@@ -23,24 +23,30 @@ let currentQuestion = 0;
 
 const initialize = function () {
   document.getElementById('number-question').innerHTML = questions.length;
-  showCurrentQuestion(currentQuestion);
+  showQuestion();
 };
 
-const showCurrentQuestion = function (indexQuestion) {
-  let question_init = document.getElementById('frage');
+const showQuestion = function () {
+  let question = questions[currentQuestion];
 
-  question_init.innerHTML = questions[indexQuestion].question;
+  document.getElementById('question').innerHTML = question['question'];
   for (let i = 0; i < 4; i++) {
-    const response = questions[indexQuestion][`answer_${i + 1}`];
+    const response = question[`answer_${i + 1}`];
     const question_i = `${response}`;
-    let questionEntry = document.getElementById(`question${i + 1}`);
-    questionEntry.innerHTML = question_i;
+    document.getElementById(`answer_${i + 1}`).innerHTML = question_i;
   }
 };
 
-const generateCurrentIndex = function () {
-  currentQuestion++;
-  if (currentQuestion < questions.length) {
-    showCurrentQuestion(currentQuestion);
+const answer = function (selectedAnswer) {
+  let question = questions[currentQuestion];
+  let selectedQuestionNumber = selectedAnswer.slice(-1);
+  if (selectedQuestionNumber == question['right_answer']) {
+    document
+      .getElementById(selectedAnswer)
+      .parentNode.classList.add('bg-success');
+  } else {
+    document
+      .getElementById(selectedAnswer)
+      .parentNode.classList.add('bg-danger');
   }
 };

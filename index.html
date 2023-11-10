@@ -31,27 +31,38 @@
       <div class="card quiz-card">
         <img src="/images/woman.png" class="card-img-top" alt="Woman" />
         <div class="card-body">
-          <h5 id="frage" class="card-title">Frage</h5>
+          <h5 id="question" class="card-title">Frage</h5>
 
-          <div class="card mb-2">
-            <div id="question1" class="card-body">Antwort</div>
+          <div class="card mb-2 quiz-answer-card">
+            <div id="answer_1" class="card-body" onclick="answer('answer_1')">
+              Antwort
+            </div>
           </div>
 
-          <div class="card mb-2">
-            <div id="question2" class="card-body">Antwort</div>
+          <div class="card mb-2 quiz-answer-card">
+            <div id="answer_2" class="card-body" onclick="answer('answer_2')">
+              Antwort
+            </div>
           </div>
-          <div class="card mb-2">
-            <div id="question3" class="card-body">Antwort</div>
+          <div class="card mb-2 quiz-answer-card">
+            <div id="answer_3" class="card-body" onclick="answer('answer_3')">
+              Antwort
+            </div>
           </div>
-          <div class="card mb-2">
-            <div id="question4" class="card-body">Antwort</div>
+          <div class="card mb-2 quiz-answer-card">
+            <div id="answer_4" class="card-body" onclick="answer('answer_4')">
+              Antwort
+            </div>
           </div>
           <div class="question-footer">
-            <div><b>1</b> von <b id="number-question">5</b> Fragen</div>
+            <div>
+              <b id="current-number">1</b> von
+              <b id="number-question">5</b> Fragen
+            </div>
             <button
               type="button"
               class="btn btn-success"
-              onclick="generateCurrentIndex()"
+              onclick="showNextQuestion()"
             >
               Nächste Frage
             </button>
