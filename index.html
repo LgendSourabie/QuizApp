@@ -22,7 +22,7 @@
         class="progress-bar"
         style="
           width: 0%;
-          background-color: rgb(39, 53, 92);
+          background-color: #ff623e;
           transition: all 150ms ease-in-out;
         "
       >
@@ -31,14 +31,17 @@
     </div>
     <section>
       <div class="side-menu">
-        <img class="logo" src="/icons/logo.png" alt="" />
+        <div class="align-logo-timer">
+          <img class="logo" src="/icons/logo.png" alt="" />
+          <span id="timer-1" class="timer rubik-regular show-timer">30</span>
+        </div>
         <nav>
           <div id="state" class="state"></div>
           <a id="link-html" href="#" class="question-type azure"> HTML </a>
           <a id="link-js" href="#" class="question-type gray">JAVASCRIPT</a>
           <a id="link-css" href="#" class="question-type gray">CSS</a>
           <a id="link-py" href="#" class="question-type gray">PYTHON</a>
-          <span id="timer" class="timer rubik-regular">30</span>
+          <span id="timer-2" class="timer rubik-regular hidden-timer">30</span>
         </nav>
       </div>
       <div class="game-section">

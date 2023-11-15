@@ -372,7 +372,7 @@ const questions = [
 let currentQuestion = 0;
 let score = 0;
 let highscore = 0;
-let second = 40;
+let second = 500;
 let numberTry = 1;
 const TOTAL_SCORE = questions.length;
 const HTML_QUESTION = 14;
@@ -387,6 +387,7 @@ const initialisation = function () {
 
 const showQuestion = function () {
   if (currentQuestion >= questions.length || second === 0) {
+    timerStop();
     scores(score, score >= highscore ? score : highscore);
     document.getElementById('show-result').style.display = '';
     document.getElementById('show-trophy').style.display = '';
@@ -447,7 +448,7 @@ const startGame = function () {
   document.getElementById('game-window').style.display = 'block';
   // document.getElementById("game-window-bottom").style.display = "flex";
   initialisation();
-  setInterval(timer, 1000);
+  timerStart();
 };
 
 const nextQuestion = function () {
@@ -484,16 +485,20 @@ const replay = function () {
   highscore = (TOTAL_SCORE * highscore) / 100;
   score = 0;
   currentQuestion = 0;
-  second = 40;
-  setTimeout(timer, 1000);
-  document.getElementById('state').style.transform = '';
-  document.getElementById('link-py').style.color = '';
-  document.getElementById('link-html').style.color = '';
+  second = 500;
+  timerStart();
   startGame();
   stateBar();
   showQuestion();
+  document.getElementById('state').style.transform = '';
+  document.getElementById('link-html').style.color = '';
+  document.getElementById('link-py').style.color = '';
   document.getElementById('show-result').style.display = 'none';
   document.getElementById('show-trophy').style.display = 'none';
+  document.getElementById('timer-1').style.backgroundColor = '';
+  document.getElementById('timer-1').style.color = '';
+  document.getElementById('timer-2').style.backgroundColor = '';
+  document.getElementById('timer-2').style.color = '';
   // document.getElementById("enable-button-next").disabled = true;
   // document.getElementById("enable-button-previous").disabled = true;
 };
@@ -525,17 +530,39 @@ const stateBar = function () {
 const timer = function () {
   if (second > 0) {
     second--;
-    document.getElementById('timer').textContent = second;
+    document.getElementById('timer-1').textContent = second;
+    document.getElementById('timer-2').textContent = second;
+    console.log('ja');
     if (second <= 10) {
       danger();
     }
   } else if (second === 0) {
     showQuestion();
     second--;
+    console.log('transition');
   }
+  console.log('nein');
 };
 
 const danger = function () {
-  document.getElementById('timer').style.backgroundColor = '#E1332D';
-  document.getElementById('timer').style.color = 'white';
+  let timerEl1 = document.getElementById('timer-1');
+  let timerEl2 = document.getElementById('timer-2');
+  timerEl1.style.backgroundColor =
+    timerEl1.style.backgroundColor === 'azure' ? '#E1332D' : 'azure';
+  timerEl2.style.backgroundColor =
+    timerEl2.style.backgroundColor === 'azure' ? '#E1332D' : 'azure';
+  timerEl1.style.color = timerEl1.style.color === 'black' ? 'azure' : 'black';
+  timerEl2.style.color = timerEl2.style.color === 'black' ? 'azure' : 'black';
+};
+
+let isIntervallSet;
+const timerStart = function () {
+  if (!isIntervallSet) {
+    isIntervallSet = setInterval(timer, 1000);
+  }
+};
+
+const timerStop = function () {
+  clearInterval(isIntervallSet);
+  isIntervallSet = null;
 };

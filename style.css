@@ -2,6 +2,8 @@ body {
   min-height: 100vh;
   width: 100vw;
   margin: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 section {
   min-height: inherit;
@@ -39,7 +41,6 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* margin-left: 20px; */
   position: relative;
   gap: 10px;
   margin-top: 40px;
@@ -54,9 +55,8 @@ nav {
 }
 a:not(.share) {
   text-decoration: none;
-  /* color: azure; */
   padding: 4px;
-  font-family: "Rubik";
+  font-family: 'Rubik';
   margin-left: 30px;
 }
 
@@ -78,14 +78,14 @@ a:not(.share) {
 }
 
 .welcome-message {
-  font-family: "PT Sans";
+  font-family: 'PT Sans';
   font-weight: bold;
   text-align: center;
   margin-block-start: 0em;
   margin-block-end: 0em;
 }
 .ready {
-  font-family: "PT Sans";
+  font-family: 'PT Sans';
   margin-block-start: 0em;
   margin-block-end: 0em;
   margin-top: 10px;
@@ -96,7 +96,7 @@ a:not(.share) {
   border-radius: 10px;
   background-color: rgb(39, 53, 92);
   color: azure;
-  font-family: "Rubik";
+  font-family: 'Rubik';
   padding: 10px;
   cursor: pointer;
   border: none;
@@ -126,24 +126,29 @@ a:not(.share) {
   padding: 15px 18px 15px 18px;
   margin-right: 16px;
   color: white;
-  font-family: "Rubik";
+  font-family: 'Rubik';
   font-weight: bold;
 }
 .question {
-  font-family: "Rubik";
+  font-family: 'Rubik';
   font-size: medium;
   margin-block-start: 0;
   margin-block-end: 0;
   padding-bottom: 24px;
   padding-top: 24px;
+  display: flex;
+  justify-content: center;
 }
 .rubik-regular {
-  font-family: "Rubik";
+  font-family: 'Rubik';
   font-size: normal;
 }
 .brain {
   padding: 0 2rem 0 2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .next-icons {
   display: flex;
@@ -217,19 +222,18 @@ p {
   gap: 18px;
 }
 .rubik-bold {
-  font-family: "Rubik";
+  font-family: 'Rubik';
   font-style: normal;
   font-weight: bold;
 }
 .progress-bar {
   text-align: center;
   color: azure;
-  font-family: "Rubik";
+  font-family: 'Rubik';
 }
 
 .state {
   background-color: azure;
-  /* margin-right: 20px; */
   position: absolute;
   top: -6px;
   height: 27.2px;
@@ -251,4 +255,72 @@ p {
   align-items: center;
   justify-content: center;
   transition: all 150ms ease-in-out;
+}
+
+.align-logo-timer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.show-timer {
+  display: none;
+}
+
+@media (width<720px) {
+  section {
+    flex-direction: column;
+    transition: all 150ms ease-in-out;
+  }
+  .game-section {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 10px;
+    width: 25rem;
+    height: 35rem;
+    transition: all 300ms ease-in-out;
+  }
+  .side-menu {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    width: 25rem;
+    height: 10rem;
+    transition: all 300ms ease-in-out;
+  }
+  .hidden-timer {
+    display: none;
+  }
+  nav {
+    flex-direction: row;
+    gap: 30px;
+    margin-top: 24px;
+  }
+  a:not(.share) {
+    margin-left: 0;
+    font-size: small;
+  }
+  .show-timer {
+    display: flex;
+    padding: 16px;
+
+    transition: all 150ms ease-in-out;
+  }
+  .state {
+    display: none;
+  }
+
+  .trophy {
+    width: 4rem;
+  }
+}
+
+@media (width<350px) {
+  nav {
+    gap: 18px;
+    transition: all 400ms ease-in-out;
+  }
+  .card {
+    margin-bottom: 18px;
+    width: 16rem;
+    margin-left: 32px;
+    transition: all 300ms ease-in-out;
+  }
 }
