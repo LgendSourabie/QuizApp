@@ -28,7 +28,7 @@ html {
 }
 
 .game-section {
-  background-image: url(/icons/brainbg.jpg);
+  background-image: url(./icons/brainbg.jpg);
   background-position: center;
   object-fit: cover;
   background-repeat: no-repeat;
@@ -56,7 +56,7 @@ nav {
 a:not(.share) {
   text-decoration: none;
   padding: 4px;
-  font-family: 'Rubik';
+  font-family: 'Rubik', 'Arial';
   margin-left: 30px;
 }
 
@@ -78,14 +78,14 @@ a:not(.share) {
 }
 
 .welcome-message {
-  font-family: 'PT Sans';
+  font-family: 'PT Sans', 'Arial';
   font-weight: bold;
   text-align: center;
   margin-block-start: 0em;
   margin-block-end: 0em;
 }
 .ready {
-  font-family: 'PT Sans';
+  font-family: 'PT Sans', 'Arial';
   margin-block-start: 0em;
   margin-block-end: 0em;
   margin-top: 10px;
@@ -96,7 +96,7 @@ a:not(.share) {
   border-radius: 10px;
   background-color: rgb(39, 53, 92);
   color: azure;
-  font-family: 'Rubik';
+  font-family: 'Rubik', 'Arial';
   padding: 10px;
   cursor: pointer;
   border: none;
@@ -126,11 +126,11 @@ a:not(.share) {
   padding: 15px 18px 15px 18px;
   margin-right: 16px;
   color: white;
-  font-family: 'Rubik';
+  font-family: 'Rubik', 'Arial';
   font-weight: bold;
 }
 .question {
-  font-family: 'Rubik';
+  font-family: 'Rubik', 'Arial';
   font-size: medium;
   margin-block-start: 0;
   margin-block-end: 0;
@@ -140,7 +140,7 @@ a:not(.share) {
   justify-content: center;
 }
 .rubik-regular {
-  font-family: 'Rubik';
+  font-family: 'Rubik', 'Arial';
   font-size: normal;
 }
 .brain {
@@ -150,11 +150,7 @@ a:not(.share) {
   align-items: center;
   justify-content: center;
 }
-.next-icons {
-  display: flex;
-  justify-content: space-between;
-  padding: 30px 2px 20px 2px;
-}
+
 .switch {
   margin-top: 10px;
   padding: 10px;
@@ -169,9 +165,7 @@ a:not(.share) {
 .img-next {
   width: 1.2rem;
 }
-.previous {
-  rotate: 180deg;
-}
+
 .end-screen {
   display: flex;
   flex-direction: column;
@@ -199,37 +193,50 @@ p {
   align-items: center;
   gap: 16px;
 }
+/* .share-button {
+
+} */
+
 .share-button {
-  border-radius: 10px;
-}
-.share-button a {
   padding: 10px 30px 10px 30px;
-  text-decoration: none;
-  color: rgb(30, 51, 111);
-  font-weight: bold;
+  border-radius: 10px;
+  background-color: rgba(39, 53, 92, 0.9);
+  border: none;
   cursor: pointer;
+  transition: all 300s ease-in-out;
+  text-decoration: none;
+  color: azure;
+  font-weight: bold;
 }
 
 .replay-button {
   padding: 10px 30px 10px 30px;
   border-radius: 10px;
-  color: rgb(30, 51, 111);
+  color: azure;
   font-weight: bold;
+  background-color: rgba(39, 53, 92, 0.9);
+  border: none;
   cursor: pointer;
+  transition: all 300s ease-in-out;
 }
+.replay-button:hover {
+  padding-left: 25px;
+  padding-right: 35px;
+}
+
 .button-group {
   display: flex;
   gap: 18px;
 }
 .rubik-bold {
-  font-family: 'Rubik';
+  font-family: 'Rubik', 'Arial';
   font-style: normal;
   font-weight: bold;
 }
 .progress-bar {
   text-align: center;
   color: azure;
-  font-family: 'Rubik';
+  font-family: 'Rubik', 'Arial';
 }
 
 .state {
@@ -270,6 +277,9 @@ p {
   section {
     flex-direction: column;
     transition: all 150ms ease-in-out;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    justify-content: flex-start;
   }
   .game-section {
     border-top-right-radius: 0;
@@ -309,6 +319,7 @@ p {
 
   .trophy {
     width: 4rem;
+    top: 300px;
   }
 }
 
@@ -322,5 +333,9 @@ p {
     width: 16rem;
     margin-left: 32px;
     transition: all 300ms ease-in-out;
+  }
+  .question {
+    padding-left: 41px;
+    padding-right: 33px;
   }
 }

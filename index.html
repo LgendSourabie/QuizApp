@@ -3,12 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fav icon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon/favicon-16x16.png"
+    />
+    <link
+      rel="mask-icon"
+      href="./favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="font.css" />
-    <title>QUizApp</title>
+    <title>QuizApp</title>
   </head>
   <body>
+    <!-- Progress bar -->
     <div
       class="progress"
       role="progressbar"
@@ -29,11 +56,13 @@
         25%
       </div>
     </div>
+    <!-- playground -->
     <section>
+      <!-- side Bar containing HTML,JS,CSS und Python -->
       <div class="side-menu">
         <div class="align-logo-timer">
-          <img class="logo" src="/icons/logo.png" alt="" />
-          <span id="timer-1" class="timer rubik-regular show-timer">30</span>
+          <img class="logo" src="./icons/logo.png" alt="Logo" />
+          <span id="timer-1" class="timer rubik-regular show-timer">35</span>
         </div>
         <nav>
           <div id="state" class="state"></div>
@@ -41,9 +70,10 @@
           <a id="link-js" href="#" class="question-type gray">JAVASCRIPT</a>
           <a id="link-css" href="#" class="question-type gray">CSS</a>
           <a id="link-py" href="#" class="question-type gray">PYTHON</a>
-          <span id="timer-2" class="timer rubik-regular hidden-timer">30</span>
+          <span id="timer-2" class="timer rubik-regular hidden-timer">35</span>
         </nav>
       </div>
+      <!-- Game section with questions to be answer -->
       <div class="game-section">
         <div id="start" class="center-text">
           <h2 class="welcome-message">
@@ -81,35 +111,12 @@
             </div>
           </div>
         </div>
-        <!-- <div id="game-window-bottom" class="next-icons" style="display: none">
-          <button
-            id="enable-button-previous"
-            class="switch"
-            disabled
-            onclick="previousQuestion()"
-          >
-            <img
-              class="img-next previous"
-              src="/icons/previous.svg"
-              alt="previous-button"
-            />
-          </button>
-          <button
-            id="enable-button-next"
-            class="switch"
-            disabled
-            onclick="nextQuestion()"
-          >
-            <img
-              class="img-next next"
-              src="/icons/next.svg"
-              alt="next-button"
-            />
-          </button>
-        </div> -->
-
         <div id="show-result" class="end-screen" style="display: none">
-          <img class="brain-result" src="/icons/brain result.png" alt="" />
+          <img
+            class="brain-result"
+            src="./icons/brain result.png"
+            alt="Brain Result"
+          />
           <p class="rubik-bold">COMPLETE <br />HTML QUIZ</p>
           <div class="inline-score rubik-bold">
             <p>🎉 YOUR SCORE:</p>
@@ -123,14 +130,12 @@
             <span><b id="highscore">0</b></span>
           </div>
           <div class="button-group">
-            <button class="share-button rubik-regular" onclick="share()">
-              <a
-                class="share"
-                href="whatsapp://send?text=The text to share!"
-                data-action="share/whatsapp/share"
-                >SHARE</a
-              >
-            </button>
+            <a
+              class="share share-button rubik-regular"
+              href="whatsapp://send?text=The text to share!"
+              data-action="share/whatsapp/share"
+              >SHARE</a
+            >
             <button class="replay-button rubik-regular" onclick="replay()">
               REPLAY
             </button>
@@ -140,7 +145,7 @@
       <img
         id="show-trophy"
         class="trophy"
-        src="/icons/tropy.png"
+        src="./icons/tropy.png"
         alt="Trophy"
         style="display: none"
       />

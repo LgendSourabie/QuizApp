@@ -370,72 +370,98 @@ const questions = [
 ];
 
 let currentQuestion = 0;
-let score = 0;
-let highscore = 0;
-let second = 500;
-let numberTry = 1;
+let score = 0; // current score
+let highscore = 0; // highscore of the game
+let second = 35; // the game last 35 seconds
+let isFirstTry = true; // First try
+let isIntervallSet; // should timer continue?
 const TOTAL_SCORE = questions.length;
 const HTML_QUESTION = 14;
 const JAVASCRIPT_QUESTION = 24;
 const CSS_QUESTION = 34;
+const AUDIO_WRONG = new Audio('./audios/wrong.wav');
+const AUDIO_CORRECT = new Audio('./audios/correct.wav');
 let progressPercent = (100 * (currentQuestion + 1)) / TOTAL_SCORE;
 
+// initialise the page with first question
 const initialisation = function () {
-  // document.getElementById("total-score").innerHTML = TOTAL_SCORE;
   showQuestion();
 };
 
+// render the question to the page
 const showQuestion = function () {
   if (currentQuestion >= questions.length || second === 0) {
-    timerStop();
-    scores(score, score >= highscore ? score : highscore);
-    document.getElementById('show-result').style.display = '';
-    document.getElementById('show-trophy').style.display = '';
-    document.getElementById('game-window').style.display = 'none';
-    // document.getElementById("game-window-bottom").style.display = "none";
+    gameOver();
   } else {
-    progressPercent = (100 * (currentQuestion + 1)) / questions.length;
-    document.getElementById(
-      'progress-bar'
-    ).style.width = `${progressPercent.toFixed()}%`;
-    document.getElementById(
-      'progress-bar'
-    ).innerHTML = `${progressPercent.toFixed()}%`;
-    document.getElementById(`question`).innerHTML =
-      questions[currentQuestion][`question`];
-    for (let i = 0; i < 4; i++) {
-      document.getElementById(`answer_${i + 1}`).innerHTML =
-        questions[currentQuestion][`answer_${i + 1}`];
-    }
+    gameContinue();
   }
 };
 
+// User answer the question with just one try , the next question is automatically called hier
 const answer = function (selectedAnswer) {
-  if (numberTry === 1) {
+  // first try ? then the user can try
+  if (isFirstTry == true) {
+    // correct answer
     if (
       selectedAnswer.slice(-1) == questions[currentQuestion]['right_answer']
     ) {
       score++;
+      AUDIO_CORRECT.play();
       document.getElementById(selectedAnswer).parentNode.style.backgroundColor =
         'rgb(183,247,153)';
-      setTimeout(nextQuestion, 400);
+      setTimeout(nextQuestion, 300);
       stateBar();
-    } else {
+    }
+    // False answer
+    else {
+      AUDIO_WRONG.play();
       document.getElementById(selectedAnswer).parentNode.style.backgroundColor =
         'rgb(255,163,164)';
       document.getElementById(
         `answer_${questions[currentQuestion]['right_answer']}`
       ).parentNode.style.backgroundColor = 'rgb(183,247,153)';
-      setTimeout(nextQuestion, 400);
+      setTimeout(nextQuestion, 300);
       stateBar();
     }
-    // document.getElementById("enable-button-next").disabled = false;
-    // document.getElementById("enable-button-previous").disabled = false;
   }
 
-  numberTry++;
+  isFirstTry = false; // increase the number of try when user play => so no more thry for the same question
 };
 
+const startGame = function () {
+  document.getElementById('start').style.display = 'none';
+  document.getElementById('game-window').style.display = 'block';
+  initialisation();
+  timerStart();
+};
+
+// game over? stop timer then
+const gameOver = function () {
+  timerStop();
+  scores(score, score >= highscore ? score : highscore);
+  document.getElementById('show-result').style.display = '';
+  document.getElementById('show-trophy').style.display = '';
+  document.getElementById('game-window').style.display = 'none';
+};
+
+// continue the game when time not over or game not finished
+const gameContinue = function () {
+  progressPercent = (100 * (currentQuestion + 1)) / questions.length;
+  document.getElementById(
+    'progress-bar'
+  ).style.width = `${progressPercent.toFixed()}%`;
+  document.getElementById(
+    'progress-bar'
+  ).innerHTML = `${progressPercent.toFixed()}%`;
+  document.getElementById(`question`).innerHTML =
+    questions[currentQuestion][`question`];
+  for (let i = 0; i < 4; i++) {
+    document.getElementById(`answer_${i + 1}`).innerHTML =
+      questions[currentQuestion][`answer_${i + 1}`];
+  }
+};
+
+// calculation of score
 const scores = function (scoreValue, highScoreValue) {
   score = (100 * scoreValue) / TOTAL_SCORE;
   highscore = (100 * highScoreValue) / TOTAL_SCORE;
@@ -443,53 +469,41 @@ const scores = function (scoreValue, highScoreValue) {
   document.getElementById('highscore').innerHTML = `${highscore.toFixed()} %`;
 };
 
-const startGame = function () {
-  document.getElementById('start').style.display = 'none';
-  document.getElementById('game-window').style.display = 'block';
-  // document.getElementById("game-window-bottom").style.display = "flex";
-  initialisation();
-  timerStart();
-};
-
+// go to next question an the user answer t the current question
 const nextQuestion = function () {
-  currentQuestion++;
-  numberTry = 1;
+  currentQuestion++; // increment the state of the current question
+  isFirstTry = true; // reinitilize the possible number of try to 1
   showQuestion();
   resetBoungroundColor();
-  // document.getElementById("enable-button-next").disabled = true;
-  // document.getElementById("enable-button-previous").disabled = true;
 };
+
+// reinitialise the background color of the question container after at the next question
 
 const resetBoungroundColor = function () {
   document.getElementById('answer_1').parentNode.style.backgroundColor = '';
   document.getElementById('answer_2').parentNode.style.backgroundColor = '';
   document.getElementById('answer_3').parentNode.style.backgroundColor = '';
   document.getElementById('answer_4').parentNode.style.backgroundColor = '';
-  document.getElementById('answer_1').parentNode.style.backgroundColor = '';
-  document.getElementById('answer_2').parentNode.style.backgroundColor = '';
-  document.getElementById('answer_3').parentNode.style.backgroundColor = '';
-  document.getElementById('answer_4').parentNode.style.backgroundColor = '';
 };
 
-const previousQuestion = function () {
-  if (currentQuestion > 0) {
-    currentQuestion--;
-    showQuestion();
-    resetBoungroundColor();
-    document.getElementById('enable-button-next').disabled = true;
-    document.getElementById('enable-button-previous').disabled = true;
-  }
-};
-
+// Replay the game
 const replay = function () {
+  // initialisation of the variable
   highscore = (TOTAL_SCORE * highscore) / 100;
   score = 0;
   currentQuestion = 0;
-  second = 500;
+  second = 35;
+
+  // start of the game
   timerStart();
   startGame();
   stateBar();
   showQuestion();
+  reinitialiseButton();
+};
+
+//reinitialise the colors of the timer, the link and update the state
+const reinitialiseButton = function () {
   document.getElementById('state').style.transform = '';
   document.getElementById('link-html').style.color = '';
   document.getElementById('link-py').style.color = '';
@@ -499,9 +513,9 @@ const replay = function () {
   document.getElementById('timer-1').style.color = '';
   document.getElementById('timer-2').style.backgroundColor = '';
   document.getElementById('timer-2').style.color = '';
-  // document.getElementById("enable-button-next").disabled = true;
-  // document.getElementById("enable-button-previous").disabled = true;
 };
+
+//state bar to see which type of question need to be responded
 
 const stateBar = function () {
   if (
@@ -527,23 +541,22 @@ const stateBar = function () {
   }
 };
 
+// Set the timer
 const timer = function () {
   if (second > 0) {
     second--;
     document.getElementById('timer-1').textContent = second;
     document.getElementById('timer-2').textContent = second;
-    console.log('ja');
     if (second <= 10) {
       danger();
     }
   } else if (second === 0) {
     showQuestion();
     second--;
-    console.log('transition');
   }
-  console.log('nein');
 };
 
+// the timer background turns red when 10 seconds remained
 const danger = function () {
   let timerEl1 = document.getElementById('timer-1');
   let timerEl2 = document.getElementById('timer-2');
@@ -555,13 +568,13 @@ const danger = function () {
   timerEl2.style.color = timerEl2.style.color === 'black' ? 'azure' : 'black';
 };
 
-let isIntervallSet;
+// start timer
 const timerStart = function () {
   if (!isIntervallSet) {
     isIntervallSet = setInterval(timer, 1000);
   }
 };
-
+// stop timer
 const timerStop = function () {
   clearInterval(isIntervallSet);
   isIntervallSet = null;
